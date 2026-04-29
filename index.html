@@ -1,170 +1,607 @@
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
+<html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rendra Achyunda Anugrah Putra | Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;800;900&display=swap"
+        rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    },
                     colors: {
-                        brand: { 400: '#38bdf8', 500: '#0ea5e9', 600: '#0284c7' }
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                            950: '#172554',
+                        },
+                        accent: {
+                            400: '#818cf8',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                        }
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
                     }
                 }
             }
         }
     </script>
     <style>
-        .glass-card {
+        body {
+            background-color: #0f172a;
+            color: #cbd5e1;
+            overflow-x: hidden;
+        }
+
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .hover-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .hover-card:hover {
+            transform: translateY(-8px) scale(1.02);
             background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-color: rgba(96, 165, 250, 0.3);
+            box-shadow: 0 20px 40px -10px rgba(59, 130, 246, 0.2);
         }
-        .glass-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px -10px rgba(14, 165, 233, 0.3);
-        }
+
         .gradient-text {
-            background: linear-gradient(to right, #38bdf8, #818cf8);
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .timeline-dot {
+            box-shadow: 0 0 0 4px rgba(15, 23, 42, 1), 0 0 0 6px rgba(59, 130, 246, 0.5);
+        }
+
+        /* Abstract Background Orbs */
+        .bg-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.4;
+            animation: float 20s infinite alternate;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+
+            100% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background: linear-gradient(90deg, #60a5fa, #818cf8);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
         }
     </style>
 </head>
-<body class="bg-slate-900 text-slate-300 antialiased selection:bg-brand-500 selection:text-white">
 
-    <nav class="fixed w-full z-50 top-0 transition-all duration-300 backdrop-blur-md bg-slate-900/80 border-b border-slate-800">
-        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-xl font-bold text-white tracking-wider">RA<span class="text-brand-400">.</span></a>
+<body class="antialiased selection:bg-brand-500/30 selection:text-brand-200 relative">
+
+    <!-- Background Elements -->
+    <div class="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
+        <div class="bg-orb w-[500px] h-[500px] bg-brand-900/40 -top-40 -left-20"></div>
+        <div class="bg-orb w-[600px] h-[600px] bg-accent-900/30 top-1/3 -right-40" style="animation-delay: -5s;"></div>
+        <div class="bg-orb w-[400px] h-[400px] bg-indigo-900/40 -bottom-20 left-1/3" style="animation-delay: -10s;">
+        </div>
+        <div
+            class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDUiLz4KPC9zdmc+')] opacity-20">
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 top-0 glass-panel border-b-0 border-slate-800/50 transition-all duration-300 py-4">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <a href="#" class="text-2xl font-heading font-bold tracking-tight text-white">RA<span
+                    class="text-brand-500">.</span></a>
             <div class="hidden md:flex space-x-8 text-sm font-medium">
-                <a href="#about" class="hover:text-brand-400 transition-colors">About</a>
-                <a href="#experience" class="hover:text-brand-400 transition-colors">Experience</a>
-                <a href="#skills" class="hover:text-brand-400 transition-colors">Tech Stack</a>
-                <a href="#research" class="hover:text-brand-400 transition-colors">Research</a>
+                <a href="#about" class="nav-link text-slate-300 hover:text-white transition-colors">About</a>
+                <a href="#experience" class="nav-link text-slate-300 hover:text-white transition-colors">Experience</a>
+                <a href="#impact" class="nav-link text-slate-300 hover:text-white transition-colors">Global Impact</a>
+                <a href="#skills" class="nav-link text-slate-300 hover:text-white transition-colors">Expertise</a>
             </div>
+
         </div>
     </nav>
 
-    <section id="hero" class="min-h-screen flex items-center justify-center pt-20 px-6 relative overflow-hidden">
-        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-600/20 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-600/20 rounded-full blur-3xl"></div>
-        
+    <!-- Hero Section -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center pt-24 pb-12 px-6">
         <div class="max-w-4xl mx-auto text-center z-10">
-            <p class="text-brand-400 font-medium tracking-wide mb-4 uppercase text-sm">Hello, I'm</p>
-            <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6 tracking-tight">
+            <div
+                class="inline-flex items-center px-4 py-2 rounded-full glass-panel border border-brand-500/30 text-brand-300 text-xs font-semibold uppercase tracking-widest mb-8">
+                <span class="w-2 h-2 rounded-full bg-brand-400 mr-2 animate-pulse"></span>
+                Statistician • Data Scientist • AI Specialist
+            </div>
+
+            <h1 class="text-5xl md:text-7xl font-heading font-extrabold text-white mb-6 leading-tight tracking-tight">
                 Rendra Achyunda <br />
                 <span class="gradient-text">Anugrah Putra</span>
             </h1>
-            <p class="text-xl md:text-2xl text-slate-400 mb-10 max-w-2xl mx-auto font-light">
-                Senior Statistician & Computational Specialist bridging big data architecture, econometrics, and artificial intelligence.
+
+            <p class="text-lg md:text-xl text-slate-400 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
+                Bridging the gap between <strong class="text-slate-200 font-medium">Official Statistics</strong>,
+                <strong class="text-slate-200 font-medium">Big Data Architecture</strong>, and <strong
+                    class="text-slate-200 font-medium">Public Policy</strong>. Over a decade of experience translating
+                complex data into actionable global insights.
             </p>
-            <div class="flex justify-center space-x-6">
-                <a href="mailto:email@anda.com" class="px-8 py-3 bg-brand-500 hover:bg-brand-600 text-white rounded-full font-medium transition-all shadow-lg shadow-brand-500/30">
-                    Get In Touch
+
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#experience"
+                    class="px-8 py-3.5 bg-white text-slate-900 rounded-full font-semibold hover:bg-slate-100 transition-all">
+                    Explore My Work
                 </a>
-                <a href="https://github.com/username" target="_blank" class="p-3 text-slate-400 hover:text-white transition-colors">
-                    <i class="fab fa-github text-2xl"></i>
-                </a>
-                <a href="https://linkedin.com/in/username" target="_blank" class="p-3 text-slate-400 hover:text-[#0A66C2] transition-colors">
-                    <i class="fab fa-linkedin text-2xl"></i>
-                </a>
+                <div class="flex items-center gap-4 px-6 glass-panel rounded-full">
+                    <a href="https://linkedin.com/in/rendra-ap" target="_blank"
+                        class="text-slate-400 hover:text-brand-400 transition-colors py-3">
+                        <i class="fab fa-linkedin-in text-xl"></i>
+                    </a>
+                    <a href="mailto:rendra.ap@bps.go.id"
+                        class="text-slate-400 hover:text-brand-400 transition-colors py-3">
+                        <i class="fas fa-envelope text-xl"></i>
+                    </a>
+                </div>
             </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <a href="#about" class="text-slate-500 hover:text-brand-400 transition-colors">
+                <i class="fas fa-chevron-down text-2xl"></i>
+            </a>
         </div>
     </section>
 
-    <section id="about" class="py-20 px-6 bg-slate-800/30">
-        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-            <div>
-                <h2 class="text-3xl font-bold text-white mb-6">Merajut <span class="gradient-text">Data & Kebijakan</span></h2>
-                <p class="text-slate-400 leading-relaxed mb-6">
-                    Berfokus pada integrasi arsitektur big data dan *machine learning* ke dalam alur kerja statistik resmi. Memiliki minat mendalam terhadap *Economics of Open Science* serta dampak AI terhadap dinamika tenaga kerja global.
-                </p>
-                <p class="text-slate-400 leading-relaxed">
-                    Pengalaman saya mencakup pengembangan mesin pemrosesan asinkron untuk simulasi pengukuran kemiskinan, hingga memimpin sistem RAG (*Retrieval-Augmented Generation*) untuk otomatisasi pengkodean metadata klasifikasi industri.
-                </p>
-            </div>
-            <div class="glass-card p-8 rounded-2xl">
-                <h3 class="text-xl font-bold text-white mb-6 border-b border-slate-700 pb-2"><i class="fas fa-graduation-cap text-brand-400 mr-2"></i> Pendidikan Lanjutan</h3>
-                <div class="space-y-6">
+    <!-- About & Education Section -->
+    <section id="about" class="py-24 px-6 relative z-10">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-12 gap-12 items-start">
+
+                <div class="lg:col-span-7 space-y-8">
                     <div>
-                        <h4 class="text-lg font-semibold text-slate-200">Double Master’s Degree</h4>
-                        <p class="text-brand-400 text-sm mb-1">Universitas Indonesia & Rikkyo University, Tokyo</p>
-                        <p class="text-sm text-slate-400">Economics and Public Policy</p>
-                    </div>
-                    <div>
-                        <h4 class="text-lg font-semibold text-slate-200">Bachelor's Degree</h4>
-                        <p class="text-brand-400 text-sm mb-1">Politeknik Statistika STIS</p>
-                        <p class="text-sm text-slate-400">Computational Statistics</p>
+                        <h2 class="text-sm font-bold text-brand-400 tracking-widest uppercase mb-2">About Me</h2>
+                        <h3 class="text-3xl md:text-4xl font-heading font-bold text-white mb-6">Connecting <span
+                                class="gradient-text">data to policy</span></h3>
+                        <div class="space-y-4 text-slate-400 leading-relaxed font-light text-lg">
+                            <p>
+                                With extensive experience at <strong>Statistics Indonesia (BPS)</strong>, I focus on
+                                integrating big data architectures and machine learning into the workflow of official
+                                statistics. My expertise lies in designing robust data pipelines, from distributed
+                                computing using PySpark to deploying AI-driven analysis models.
+                            </p>
+                            <p>
+                                I possess a profound interest in the <em>Economics of Open Science</em> and the impact
+                                of artificial intelligence on global labor dynamics. From leading asynchronous
+                                processing engines for poverty simulation to developing RAG (Retrieval-Augmented
+                                Generation) systems for automated industrial classification coding, my goal is to push
+                                the boundaries of public sector innovation.
+                            </p>
+                        </div>
                     </div>
                 </div>
+
+                <div class="lg:col-span-5 relative">
+                    <div class="glass-panel p-8 rounded-3xl relative overflow-hidden group border border-slate-700/50">
+                        <div
+                            class="absolute top-0 right-0 w-32 h-32 bg-brand-500/10 rounded-full blur-2xl -mr-10 -mt-10 transition-all duration-500 group-hover:bg-brand-500/20">
+                        </div>
+
+                        <h3 class="text-xl font-heading font-bold text-white mb-8 flex items-center">
+                            <i class="fas fa-graduation-cap text-brand-400 mr-3 text-2xl"></i> Academic Background
+                        </h3>
+
+                        <div
+                            class="space-y-8 relative before:absolute before:inset-0 before:ml-2 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-brand-500/50 before:to-transparent">
+
+                            <!-- Master 1 -->
+                            <div class="relative pl-8">
+                                <div class="absolute w-4 h-4 bg-brand-500 rounded-full -left-[7px] top-1 timeline-dot">
+                                </div>
+                                <h4 class="text-lg font-semibold text-slate-100">Master in Public Management and
+                                    Administration (MPMA)</h4>
+                                <p class="text-brand-400 text-sm font-medium mb-2">Rikkyo University, Tokyo, Japan</p>
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span
+                                        class="px-2 py-1 bg-slate-800 text-xs rounded-md text-slate-300 font-medium">Cum-laude</span>
+                                    <span
+                                        class="px-2 py-1 bg-brand-900/50 text-brand-300 text-xs rounded-md font-medium border border-brand-500/20">JICA
+                                        Scholar</span>
+                                </div>
+                            </div>
+
+                            <!-- Master 2 -->
+                            <div class="relative pl-8">
+                                <div class="absolute w-4 h-4 bg-brand-500 rounded-full -left-[7px] top-1 timeline-dot">
+                                </div>
+                                <h4 class="text-lg font-semibold text-slate-100">Master in Economics (M.E)</h4>
+                                <p class="text-brand-400 text-sm font-medium mb-2">University of Indonesia</p>
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span
+                                        class="px-2 py-1 bg-slate-800 text-xs rounded-md text-slate-300 font-medium">Cum-laude</span>
+                                    <span
+                                        class="px-2 py-1 bg-brand-900/50 text-brand-300 text-xs rounded-md font-medium border border-brand-500/20">MoF
+                                        Scholar</span>
+                                </div>
+                            </div>
+
+                            <!-- Bachelor -->
+                            <div class="relative pl-8">
+                                <div class="absolute w-4 h-4 bg-slate-600 rounded-full -left-[7px] top-1 timeline-dot">
+                                </div>
+                                <h4 class="text-lg font-semibold text-slate-100">Bachelor of Applied Science</h4>
+                                <p class="text-slate-400 text-sm font-medium mb-2">Institute of Statistics (STIS) -
+                                    Computational Statistics</p>
+                                <span class="px-2 py-1 bg-slate-800 text-xs rounded-md text-slate-300 font-medium">Top 5
+                                    Best Graduates</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <section id="experience" class="py-20 px-6">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl font-bold text-white mb-12 text-center">Professional <span class="gradient-text">Experience</span></h2>
-            
-            <div class="relative border-l border-slate-700 ml-3 md:ml-0 md:max-w-3xl md:mx-auto space-y-12">
-                <div class="relative pl-8 md:pl-0">
-                    <div class="hidden md:block absolute w-4 h-4 bg-brand-500 rounded-full -left-2 top-1 border-4 border-slate-900"></div>
-                    <div class="glass-card p-6 rounded-xl md:ml-8">
-                        <span class="text-xs font-bold text-brand-400 tracking-widest uppercase mb-2 block">Present</span>
-                        <h3 class="text-xl font-bold text-white">Team Leader, Integrated Processing and Analysis System (IPAS)</h3>
-                        <h4 class="text-md text-slate-400 mb-4">Statistics Indonesia (BPS)</h4>
-                        <p class="text-sm text-slate-400 leading-relaxed">
-                            Memimpin pengembangan arsitektur *data lakehouse*, memigrasikan dataset dari HDFS ke S3, dan membangun *Asynchronous Job Engine*. Berperan penuh dalam merancang solusi komputasi terdistribusi menggunakan PySpark dan Delta Lake untuk pengolahan statistik skala nasional.
-                        </p>
+    <!-- Professional Experience -->
+    <section id="experience" class="py-24 px-6 relative">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-sm font-bold text-brand-400 tracking-widest uppercase mb-2">Career Journey</h2>
+                <h3 class="text-3xl md:text-5xl font-heading font-bold text-white">Professional <span
+                        class="gradient-text">Experience</span></h3>
+            </div>
+
+            <div class="space-y-6">
+
+                <!-- Role 1 -->
+                <div class="glass-panel hover-card rounded-2xl p-8 border border-slate-700/50 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-1 h-full bg-gradient-to-b from-brand-400 to-accent-500"></div>
+                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-4">
+                        <div>
+                            <h4 class="text-2xl font-bold text-white font-heading">Team Leader, Integrated Processing
+                                and Analysis System (IPAS)</h4>
+                            <p class="text-brand-400 font-medium">Statistics Indonesia (BPS) <span
+                                    class="text-slate-500 mx-2">•</span> Present</p>
+                        </div>
+                        <span
+                            class="inline-flex px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-300 text-xs font-semibold uppercase whitespace-nowrap h-fit">Current
+                            Role</span>
+                    </div>
+                    <p class="text-slate-400 leading-relaxed font-light text-sm md:text-base">
+                        Spearheading the development of data lakehouse architectures, migrating datasets from HDFS to
+                        S3, and engineering an Asynchronous Job Engine. Architecting distributed computing solutions
+                        utilizing PySpark and Delta Lake to power national-scale statistical processing and analytics.
+                    </p>
+                </div>
+
+                <!-- Role 2 -->
+                <div class="glass-panel hover-card rounded-2xl p-8 border border-slate-700/50">
+                    <div class="flex flex-col md:flex-row justify-between mb-4 gap-2">
+                        <div>
+                            <h4 class="text-xl font-bold text-white font-heading">Data Scientist in Socio-economics</h4>
+                            <p class="text-brand-400 font-medium">Statistics Indonesia (BPS)</p>
+                        </div>
+                        <p class="text-slate-500 text-sm font-medium whitespace-nowrap">Nov 2014 – Oct 2022</p>
+                    </div>
+                    <ul class="text-slate-400 font-light text-sm space-y-2 list-disc list-inside marker:text-brand-500">
+                        <li>Streamlined field survey data collection using CAPI, CAWI, and PAPI methods.</li>
+                        <li>Executed data integration and engineered ETL pipelines to populate centralized data
+                            warehouses following GSBPM frameworks.</li>
+                        <li>Innovated statistical models leveraging machine learning and developed real-time anomaly
+                            detection dashboards using Tableau/Power BI.</li>
+                    </ul>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- Role 3 -->
+                    <div class="glass-panel hover-card rounded-2xl p-6 border border-slate-700/50">
+                        <h4 class="text-lg font-bold text-white font-heading mb-1">Statistician</h4>
+                        <p class="text-brand-400 text-sm font-medium mb-3">Socio-economic Development (BPS)</p>
+                        <p class="text-slate-400 font-light text-sm mb-3">Feb 2013 – Oct 2014</p>
+                        <p class="text-slate-500 text-sm">Conducted statistical data analysis training and evaluated
+                            application architectures for standardized database design.</p>
+                    </div>
+
+                    <!-- Role 4 -->
+                    <div class="glass-panel hover-card rounded-2xl p-6 border border-slate-700/50">
+                        <h4 class="text-lg font-bold text-white font-heading mb-1">Data Analyst Trainer</h4>
+                        <p class="text-brand-400 text-sm font-medium mb-3">PETA DATA Research & Consulting</p>
+                        <p class="text-slate-400 font-light text-sm mb-3">Jun 2010 – Present</p>
+                        <p class="text-slate-500 text-sm">Delivered comprehensive training in statistical processing
+                            utilizing Python, R, STATA, and Smart PLS.</p>
                     </div>
                 </div>
 
-                <div class="relative pl-8 md:pl-0">
-                    <div class="hidden md:block absolute w-4 h-4 bg-slate-600 rounded-full -left-2 top-1 border-4 border-slate-900"></div>
-                    <div class="glass-card p-6 rounded-xl md:ml-8">
-                        <span class="text-xs font-bold text-slate-400 tracking-widest uppercase mb-2 block">AI & Research Initiative</span>
-                        <h3 class="text-xl font-bold text-white">AI Implementation Lead & Researcher</h3>
-                        <h4 class="text-md text-slate-400 mb-4">Statistics Indonesia (BPS)</h4>
-                        <p class="text-sm text-slate-400 leading-relaxed">
-                            Mengembangkan *Zero-shot AI Forecasting* dan sistem *Retrieval-Augmented Generation* (RAG) untuk otomatisasi *coding* KBLI. Melakukan riset berkelanjutan dalam *digital labor flows* dan kesiapan sektoral terhadap disrupsi AI.
-                        </p>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
 
-    <section id="skills" class="py-20 px-6 bg-slate-800/30">
+    <!-- Global Impact & Awards -->
+    <section id="impact" class="py-24 px-6 relative z-10 bg-slate-900/50 border-y border-slate-800">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-16">
+
+                <!-- Conferences -->
+                <div>
+                    <h2 class="text-sm font-bold text-brand-400 tracking-widest uppercase mb-2">Speaking Engagements
+                    </h2>
+                    <h3 class="text-3xl font-heading font-bold text-white mb-10">Global <span
+                            class="gradient-text">Impact</span></h3>
+
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div
+                                class="flex-shrink-0 w-12 h-12 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-xl text-brand-400">
+                                <i class="fas fa-globe-americas"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-white font-heading">International Monetary Fund (IMF)
+                                </h4>
+                                <p class="text-sm text-brand-400 mb-2">Invited Speaker • Washington, D.C. & Virtual</p>
+                                <p class="text-slate-400 text-sm font-light leading-relaxed">
+                                    Presented at the 8th Statistical Forum on measuring pandemic economics via mobility
+                                    data (2020), and the 6th Forum on measuring economic welfare in the digital age
+                                    (2018).
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <div
+                                class="flex-shrink-0 w-12 h-12 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-xl text-blue-400">
+                                <i class="fas fa-landmark"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-white font-heading">United Nations (UNECWA)</h4>
+                                <p class="text-sm text-brand-400 mb-2">Invited Speaker • Regional Workshop</p>
+                                <p class="text-slate-400 text-sm font-light leading-relaxed">
+                                    Shared experiences on combining traditional and non-traditional data to measure
+                                    economic activity during the pandemic (2020).
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <div
+                                class="flex-shrink-0 w-12 h-12 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-xl text-purple-400">
+                                <i class="fas fa-chart-pie"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-white font-heading">International Statistical
+                                    Institute (ISI)</h4>
+                                <p class="text-sm text-brand-400 mb-2">Invited Speaker • World Statistics Congress</p>
+                                <p class="text-slate-400 text-sm font-light leading-relaxed">
+                                    Presented papers at the 63rd (2021) and 62nd (2019, Malaysia) congresses focusing on
+                                    big data sources and search engine queries for economic modeling.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Awards & Publications -->
+                <div>
+                    <h2 class="text-sm font-bold text-brand-400 tracking-widest uppercase mb-2">Recognition</h2>
+                    <h3 class="text-3xl font-heading font-bold text-white mb-10">Awards & <span
+                            class="gradient-text">Publications</span></h3>
+
+                    <div class="glass-panel rounded-2xl p-6 border border-slate-700/50 mb-6 hover-card">
+                        <div class="flex items-center gap-3 mb-3">
+                            <i class="fas fa-trophy text-yellow-500 text-xl"></i>
+                            <h4 class="text-lg font-bold text-white font-heading">Hackathon Achievements</h4>
+                        </div>
+                        <ul class="text-slate-400 text-sm font-light space-y-2">
+                            <li class="flex items-start"><i class="fas fa-check text-brand-500 mt-1 mr-2"></i>
+                                <span><strong>Finalist</strong> - 2022 UN Big Data Hackathon (UN Statistics
+                                    Division)</span>
+                            </li>
+                            <li class="flex items-start"><i class="fas fa-check text-brand-500 mt-1 mr-2"></i>
+                                <span><strong>1st Winner</strong> - Ministry of Finance Data Science Hackathon (2021)
+                                    using R.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="glass-panel rounded-2xl p-6 border border-slate-700/50 hover-card">
+                        <div class="flex items-center gap-3 mb-3">
+                            <i class="fas fa-book-open text-brand-400 text-xl"></i>
+                            <h4 class="text-lg font-bold text-white font-heading">Selected Publications</h4>
+                        </div>
+                        <ul class="text-slate-400 text-sm font-light space-y-3">
+                            <li class="pl-4 border-l-2 border-slate-700">
+                                <span class="text-slate-200 font-medium">Journal of Asian Economics (2023)</span><br>
+                                "COVID-19-associated income loss and job loss: Evidence from Indonesia."
+                            </li>
+                            <li class="pl-4 border-l-2 border-slate-700">
+                                <span class="text-slate-200 font-medium">Ministry of Finance Book Chapter
+                                    (2022)</span><br>
+                                "Predicting Non-Tax Revenue" in Formulating to Make Sound to Your Data.
+                            </li>
+                            <li class="pl-4 border-l-2 border-slate-700">
+                                <span class="text-slate-200 font-medium">Rikkyo University & UI (2021)</span><br>
+                                "Job Informality and Gender Inequality during Covid-19 Pandemic."
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Arsenal -->
+    <section id="skills" class="py-24 px-6">
         <div class="max-w-6xl mx-auto text-center">
-            <h2 class="text-3xl font-bold text-white mb-12">Technical <span class="gradient-text">Arsenal</span></h2>
-            
-            <div class="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
-                <span class="px-5 py-2 glass-card rounded-full text-slate-200 text-sm font-medium border border-blue-500/30"><i class="fas fa-database text-blue-400 mr-2"></i> Apache Spark</span>
-                <span class="px-5 py-2 glass-card rounded-full text-slate-200 text-sm font-medium border border-blue-500/30"><i class="fas fa-water text-blue-400 mr-2"></i> Delta Lake</span>
-                <span class="px-5 py-2 glass-card rounded-full text-slate-200 text-sm font-medium border border-blue-500/30"><i class="fas fa-server text-blue-400 mr-2"></i> Hadoop / HDFS</span>
-                <span class="px-5 py-2 glass-card rounded-full text-slate-200 text-sm font-medium border border-blue-500/30"><i class="fas fa-cloud text-blue-400 mr-2"></i> S3 Storage</span>
-                
-                <span class="px-5 py-2 glass-card rounded-full text-slate-200 text-sm font-medium border border-green-500/30"><i class="fas fa-chart-line text-green-400 mr-2"></i> Stata</span>
-                <span class="px-5 py-2 glass-card rounded-full text-slate-200 text-sm font-medium border border-green-500/30"><i class="fab fa-r-project text-green-400 mr-2"></i> R</span>
-                <span class="px-5 py-2 glass-card rounded-full text-slate-200 text-sm font-medium border border-green-500/30"><i class="fab fa-python text-green-400 mr-2"></i> Python</span>
-                
-                <span class="px-5 py-2 glass-card rounded-full text-slate-200 text-sm font-medium border border-purple-500/30"><i class="fab fa-react text-purple-400 mr-2"></i> React</span>
-                <span class="px-5 py-2 glass-card rounded-full text-slate-200 text-sm font-medium border border-purple-500/30"><i class="fab fa-js text-purple-400 mr-2"></i> TypeScript</span>
-                <span class="px-5 py-2 glass-card rounded-full text-slate-200 text-sm font-medium border border-purple-500/30"><i class="fab fa-apple text-purple-400 mr-2"></i> macOS Ecosystem</span>
+            <h2 class="text-sm font-bold text-brand-400 tracking-widest uppercase mb-2">Capabilities</h2>
+            <h3 class="text-3xl md:text-5xl font-heading font-bold text-white mb-16">Technical <span
+                    class="gradient-text">Arsenal</span></h3>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
+
+                <!-- Category 1 -->
+                <div class="glass-panel p-6 rounded-2xl border border-slate-700/30 hover-card">
+                    <div class="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center mb-4">
+                        <i class="fas fa-code text-blue-400 text-xl"></i>
+                    </div>
+                    <h4 class="text-white font-heading font-bold mb-4">Programming</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="px-3 py-1 bg-slate-800 text-slate-300 text-xs rounded border border-slate-700">Python</span>
+                        <span
+                            class="px-3 py-1 bg-slate-800 text-slate-300 text-xs rounded border border-slate-700">R</span>
+                        <span
+                            class="px-3 py-1 bg-slate-800 text-slate-300 text-xs rounded border border-slate-700">Java</span>
+                        <span
+                            class="px-3 py-1 bg-slate-800 text-slate-300 text-xs rounded border border-slate-700">JavaScript</span>
+                        <span
+                            class="px-3 py-1 bg-slate-800 text-slate-300 text-xs rounded border border-slate-700">PHP</span>
+                        <span
+                            class="px-3 py-1 bg-slate-800 text-slate-300 text-xs rounded border border-slate-700">HTML/CSS</span>
+                    </div>
+                </div>
+
+                <!-- Category 2 -->
+                <div class="glass-panel p-6 rounded-2xl border border-slate-700/30 hover-card">
+                    <div class="w-10 h-10 rounded-lg bg-indigo-500/10 flex items-center justify-center mb-4">
+                        <i class="fas fa-database text-indigo-400 text-xl"></i>
+                    </div>
+                    <h4 class="text-white font-heading font-bold mb-4">Big Data & DB</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="px-3 py-1 bg-slate-800 text-slate-300 text-xs rounded border border-slate-700">Apache
+                            Spark</span>
+                        <span
+                            class="px-3 py-1 bg-slate-800 text-slate-300 text-xs rounded border border-slate-700">Hadoop</span>
+                        <span
+                            class="px-3 py-1 bg-slate-800 text-slate-300 text-xs rounded border border-slate-700">Delta
+                            Lake</span>
+                        <span
+                            class="px-3 py-1 bg-slate-800 text-slate-300 text-xs rounded border border-slate-700">MySQL</span>
+                        <span
+                            class="px-3 py-1 bg-slate-800 text-slate-300 text-xs rounded border border-slate-700">PostgreSQL</span>
+                        <span class="px-3 py-1 bg-slate-800 text-slate-300 text-xs rounded border border-slate-700">SQL
+                            Server</span>
+                    </div>
+                </div>
+
+                <!-- Category 3 -->
+                <div class="glass-panel p-6 rounded-2xl border border-slate-700/30 hover-card">
+                    <div class="w-10 h-10 rounded-lg bg-green-500/10 flex items-center justify-center mb-4">
+                        <i class="fas fa-chart-line text-green-400 text-xl"></i>
+                    </div>
+                    <h4 class="text-white font-heading font-bold mb-4">Stats & Analytics</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="px-3 py-1 bg-slate-800 text-slate-300 text-xs rounded border border-slate-700">STATA</span>
+                        <span
+                            class="px-3 py-1 bg-slate-800 text-slate-300 text-xs rounded border border-slate-700">SPSS</span>
+                        <span
+                            class="px-3 py-1 bg-slate-800 text-slate-300 text-xs rounded border border-slate-700">AMOS</span>
+                        <span
+                            class="px-3 py-1 bg-slate-800 text-slate-300 text-xs rounded border border-slate-700">Smart
+                            PLS</span>
+                        <span
+                            class="px-3 py-1 bg-slate-800 text-slate-300 text-xs rounded border border-slate-700">Tableau</span>
+                        <span
+                            class="px-3 py-1 bg-slate-800 text-slate-300 text-xs rounded border border-slate-700">Power
+                            BI</span>
+                    </div>
+                </div>
+
+                <!-- Category 4 -->
+                <div class="glass-panel p-6 rounded-2xl border border-slate-700/30 hover-card">
+                    <div class="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center mb-4">
+                        <i class="fas fa-map-marked-alt text-orange-400 text-xl"></i>
+                    </div>
+                    <h4 class="text-white font-heading font-bold mb-4">GIS & Environments</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="px-3 py-1 bg-slate-800 text-slate-300 text-xs rounded border border-slate-700">ArcGIS</span>
+                        <span
+                            class="px-3 py-1 bg-slate-800 text-slate-300 text-xs rounded border border-slate-700">macOS</span>
+                        <span
+                            class="px-3 py-1 bg-slate-800 text-slate-300 text-xs rounded border border-slate-700">Linux</span>
+                        <span class="px-3 py-1 bg-slate-800 text-slate-300 text-xs rounded border border-slate-700">AWS
+                            Cloud</span>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <footer class="py-8 border-t border-slate-800 text-center">
-        <p class="text-slate-500 text-sm">
-            &copy; <script>document.write(new Date().getFullYear())</script> Rendra Achyunda Anugrah Putra. Built with HTML & Tailwind CSS.
+    <!-- Footer -->
+    <footer class="py-10 border-t border-slate-800/50 bg-slate-900/80 mt-12 relative z-10 text-center">
+        <div class="flex justify-center space-x-6 mb-6">
+            <a href="https://linkedin.com/in/rendra-ap" target="_blank"
+                class="w-10 h-10 rounded-full glass-panel flex items-center justify-center text-slate-400 hover:text-white hover:bg-brand-600 transition-all">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="mailto:rendra.ap@bps.go.id"
+                class="w-10 h-10 rounded-full glass-panel flex items-center justify-center text-slate-400 hover:text-white hover:bg-brand-600 transition-all">
+                <i class="fas fa-envelope"></i>
+            </a>
+
+        </div>
+        <p class="text-slate-500 text-sm font-light">
+            &copy;
+            <script>document.write(new Date().getFullYear())</script> Rendra Achyunda Anugrah Putra. <br
+                class="md:hidden" />Crafted with Tailwind CSS.
         </p>
     </footer>
 
 </body>
+
 </html>
